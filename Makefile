@@ -373,7 +373,10 @@ HOST_LOADLIBES := $(HOST_LFS_LIBS)
 AS		= $(CROSS_COMPILE)as
 LD		= $(CROSS_COMPILE)ld
 LDGOLD		= $(CROSS_COMPILE)ld.gold
-CC              = $(srctree)/toolchain/clang/host/linux-x86/clang-r383902-jopp/bin/clang
+#CC		= $(CROSS_COMPILE)gcc
+# CC              = $(srctree)/toolchain/clang/host/linux-x86/clang-r383902-jopp/bin/clang
+CC=/home/grahame/toolchains/jopp/samsung-exynos9820-toolchain-default/clang/host/linux-x86/clang-4639204-cfp-jopp/bin/clang
+
 CPP		= $(CC) -E
 AR		= $(CROSS_COMPILE)ar
 NM		= $(CROSS_COMPILE)nm
