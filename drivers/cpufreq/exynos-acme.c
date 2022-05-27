@@ -1344,8 +1344,8 @@ __setup("cpu_min_c2=", cpufreq_read_cpu_min_c2);
 
 
 
-/*Underclocking prime cores to 350MHz*/
-unsigned long arg_cpu_min_c3 = 350000; 
+/*Underclocking prime cores to 520MHz*/
+unsigned long arg_cpu_min_c3 = 520000; 
 
 static __init int cpufreq_read_cpu_min_c3(char *cpu_min_c3)
 {
