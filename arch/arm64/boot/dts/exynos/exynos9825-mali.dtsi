@@ -10,10 +10,12 @@
 */
 
 &mali {
-	interactive_info = <702000 74 0>;
-	gpu_dvfs_table_size = <9 8>; /*<row col>*/
+	interactive_info = <572000 74 0>;
+	gpu_dvfs_table_size = <11 8>; /*<row col>*/
 	/*  8 columns      freq  down   up  stay  mif    little  middle   big  */
-	gpu_dvfs_table = <  702000    78   99   9  2093000       0       0       0
+	gpu_dvfs_table = <  832000    78   99   9  2093000       0       0       0
+                        802000    78   99   9  2093000       0       0       0
+                        754000    78   99   9  2093000       0       0       0
 		                650000    78   95   5  2093000       0       0       0
 		                572000    78   95   5  1794000       0       0       0
 		                433000    78   95   1  1352000       0       0       0
@@ -23,8 +25,8 @@
 		                200000    78   95   1   676000       0       0       0
 		                156000    70   90   1   676000       0       0       0 >;
 	gpu_min_clock_limit = <156000>;		
-    gpu_max_clock = <702000>;
-    gpu_max_clock_limit = <702000>;
+    gpu_max_clock = <832000>;
+    gpu_max_clock_limit = <832000>;
 	gpu_min_clock = <156000>;
 	gpu_dvfs_start_clock = <260000>;
 	gpu_dvfs_bl_config_clock = <156000>;
