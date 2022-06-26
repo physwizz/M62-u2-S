@@ -253,6 +253,13 @@ static int gpu_dvfs_update_config_data_from_dt(struct kbase_device *kbdev)
 
 #ifdef CONFIG_MALI_DVFS
 	gpu_update_config_data_int(np, "g3d_cmu_cal_id", &platform->g3d_cmu_cal_id);
+
+
+if (platform->gpu_max_clock_limit < 832000||platform->gpu_max_clock < 832000) 	// oc gpu
+	platform->gpu_max_clock=platform->gpu_max_clock_limit=832000;
+
+
+
 	gpu_update_config_data_string(np, "governor", &of_string);
 	if (!strncmp("interactive", of_string, strlen("interactive"))) {
 		platform->governor_type = G3D_DVFS_GOVERNOR_INTERACTIVE;
@@ -296,6 +303,12 @@ static int gpu_dvfs_update_config_data_from_dt(struct kbase_device *kbdev)
 	gpu_update_config_data_int(np, "gpu_cold_minimum_vol", &platform->cold_min_vol);
 	gpu_update_config_data_int(np, "gpu_voltage_offset_margin", &platform->gpu_default_vol_margin);
 	gpu_update_config_data_bool(np, "gpu_tmu_control", &platform->tmu_status);
+
+
+if (platform->tmu_status==1) //
+		platform->tmu_status=0;//0 for disable tmu control by defaul
+
+
 	gpu_update_config_data_int(np, "gpu_temp_throttling_level_num", &of_data_int);
 	if (of_data_int == TMU_LOCK_CLK_END)
 		gpu_update_config_data_int_array(np, "gpu_temp_throttling", platform->tmu_lock_clk, TMU_LOCK_CLK_END);
@@ -421,6 +434,71 @@ static int gpu_dvfs_update_asv_table(struct kbase_device *kbdev)
 						GPU_LOG(DVFS_INFO, DUMMY, 0u, 0u, "up [%d] down [%d] staycnt [%d] mif [%d] lit [%d] big [%d]\n",
 								dvfs_table[j].max_threshold, dvfs_table[j].min_threshold, dvfs_table[j].down_staycount,
 								dvfs_table[j].mem_freq, dvfs_table[j].cpu_little_min_freq, dvfs_table[j].cpu_big_max_freq);
+
+ if (dvfs_table[j].clock==832000){//
+						dvfs_table[j].min_threshold =96;
+						dvfs_table[j].max_threshold =100;
+						dvfs_table[j].mem_freq =1794000;
+						dvfs_table[j].cpu_little_min_freq=1794000;
+					}
+					if (dvfs_table[j].clock==802000){
+						dvfs_table[j].min_threshold =80;
+						dvfs_table[j].max_threshold =96;
+						dvfs_table[j].mem_freq =1794000;
+						dvfs_table[j].down_staycount=1;
+						dvfs_table[j].cpu_little_min_freq=1794000;
+					}
+					if (dvfs_table[j].clock==754000){//
+						dvfs_table[j].min_threshold =85;
+						dvfs_table[j].max_threshold =90;
+						dvfs_table[j].mem_freq =1794000;
+						dvfs_table[j].down_staycount=1;
+						dvfs_table[j].cpu_little_min_freq=1794000;
+					}
+					if (dvfs_table[j].clock==650000){
+						dvfs_table[j].min_threshold =85;//90
+						dvfs_table[j].max_threshold =90;//95
+						dvfs_table[j].mem_freq =1794000;
+						dvfs_table[j].down_staycount=1;
+						dvfs_table[j].cpu_little_min_freq=1794000;
+					}
+					if (dvfs_table[j].clock==572000){//
+						dvfs_table[j].min_threshold =85;//90//
+						dvfs_table[j].max_threshold =90;//95
+						dvfs_table[j].mem_freq =1794000;
+						dvfs_table[j].down_staycount=3;
+						dvfs_table[j].cpu_little_min_freq=1794000;
+					}
+					if (dvfs_table[j].clock==433000){
+						dvfs_table[j].min_threshold =80;//90
+						dvfs_table[j].max_threshold =85;//95
+						dvfs_table[j].mem_freq =1794000;
+						dvfs_table[j].down_staycount=2;
+						dvfs_table[j].cpu_little_min_freq=1690000;
+					}
+					if (dvfs_table[j].clock==377000){
+						dvfs_table[j].min_threshold =78;//90
+						dvfs_table[j].max_threshold =85;//95
+						dvfs_table[j].mem_freq =1539000; //676
+						dvfs_table[j].down_staycount=1;
+						dvfs_table[j].cpu_little_min_freq=1482000;
+					}
+					if (dvfs_table[j].clock==325000){
+						dvfs_table[j].min_threshold =75;//85
+						dvfs_table[j].max_threshold =85;//95
+						dvfs_table[j].mem_freq =1352000; //546
+						dvfs_table[j].down_staycount=1;
+						dvfs_table[j].cpu_little_min_freq=1144000;
+					}
+					if (dvfs_table[j].clock==260000){
+						dvfs_table[j].min_threshold =70;//70
+						dvfs_table[j].max_threshold =85;//90
+						dvfs_table[j].mem_freq =845000; //420
+						dvfs_table[j].down_staycount=1;
+						dvfs_table[j].cpu_little_min_freq=728000;
+					}
+
+
 					}
 				}
 			}
